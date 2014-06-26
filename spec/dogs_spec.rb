@@ -41,13 +41,13 @@ describe Dogs do
 
   describe "#owners" do
     it "returns all of the owners" do
-      expect(dogs.owners).to match_array(['Joe Smith', 'Sarah Smith', 'Andrew Beter'])
+      expect(dogs.owners).to match_array(['Joe Smith', 'Sarah Darnum', 'Andrew Beter'])
     end
   end
 
   describe "#average_owners" do
     it "returns all average owners" do
-      expect(dogs.average_owners).to match_array(['Sarah Smith', 'Andrew Beter'])
+      expect(dogs.average_owners).to match_array(['Sarah Darnum', 'Andrew Beter'])
     end
   end
 
@@ -75,9 +75,9 @@ describe Dogs do
 
     it "finds a dog by owner's full name" do
       andrews_dogs = dogs.find_by_owner("Andrew Beter")
-      expect(andrews_dogs.length).to eq(3)
+      expect(andrews_dogs.length).to eq(2)
       expect(andrews_dogs.first).to include(name: "Harleigh")
-      expect(andrews_dogs.last).to include(name: "Trixee")
+      expect(andrews_dogs.last).to include(name: "Trixie")
     end
 
     it "returns nothing if no owner is found" do
@@ -86,8 +86,14 @@ describe Dogs do
   end
 
   describe "#change_owner" do
+
     it "changes an owner based on first name" do
-      # fill me in!
+      new_dog = Dogs.new
+      new_dog.change_owners("Fido", "Sarah")
+      changed_dog_hash = new_dog.dogs.first
+      expect(changed_dog_hash[:owner][:name][:first]). to eq("Sarah")
+      expect(changed_dog_hash[:owner][:name][:last]). to eq("Darnum")
+      #expect(dog_hash[:owner][:name][:first]).to eq("Sarah")
     end
 
     it "changes the owner based on last name" do
